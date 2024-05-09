@@ -1,12 +1,13 @@
 section .data
-  hello db 'Hello World!',0
+  msg db 'Hello World!',0xa ; 0xaは0と何が違うか、たぶんxaが改行
+  len equ $ - msg ; length of the string
 
 section .text
   global _start
 
 _start:
-  mov edx, 13 ; メッセージの長さを指定
-  mov ecx, hello ; メッセージを指示
+  mov edx, len ; メッセージの長さを指定
+  mov ecx, msg ; メッセージを指示
   mov ebx, 1 ; ファイル記述子(標準出力)
   mov eax, 4 ; システムコール番号(sys_write)
   int 0x80 ; システムコールを呼び出す
